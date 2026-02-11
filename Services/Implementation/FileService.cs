@@ -1,3 +1,4 @@
+using System.Reflection.Metadata;
 using BlobStorageDemo.Repository;
 
 namespace BlobStorageDemo.Service
@@ -33,6 +34,14 @@ namespace BlobStorageDemo.Service
             await stream.CopyToAsync(ms);
 
             return (ms.ToArray(), contentType);
+        }
+
+        public async Task DeleteFileAsync(string blobName)
+        {
+            if(string.IsNullOrWhiteSpace(blobName))
+                throw new ArgumentException("Blob Name is Invalid");
+            
+            await _blobStorageRepo.DeleteAsync(blobName);
         }
     }
 }

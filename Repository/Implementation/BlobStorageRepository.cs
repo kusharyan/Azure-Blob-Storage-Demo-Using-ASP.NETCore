@@ -46,5 +46,15 @@ namespace BlobStorageDemo.Repository
             var response = await blobClient.DownloadAsync();
             return (response.Value.Content, response.Value.Details.ContentType);
         }
+
+        public async Task DeleteAsync(string blobName)
+        {
+            var blobClient = _blobContainerClient.GetBlobClient(blobName);
+            var exists = await blobClient.ExistsAsync();
+            if(!exists.Value)
+                throw new FileNotFoundException("Blob Not Found");
+
+            await blobClient.DeleteAsync();
+        }
     }
 }

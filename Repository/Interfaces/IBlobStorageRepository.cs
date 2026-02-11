@@ -9,6 +9,7 @@ namespace BlobStorageDemo.Repository
         );
 
         Task<(Stream Content, string ContentType)> DownloadAsync(string blobName);
+        Task DeleteAsync(string blobName);
     }
 }
 
