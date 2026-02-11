@@ -40,6 +40,7 @@ namespace BlobStorageDemo.Controller
             );
         }
 
+        [HttpDelete("delete/{blobName}")]
         public async Task<IActionResult> DeleteFile(string blobName)
         {
             await _fileService.DeleteFileAsync(blobName);
