@@ -39,5 +39,17 @@ namespace BlobStorageDemo.Controller
                 fileDownloadName: blobName
             );
         }
+
+        [HttpDelete("delete/{blobName}")]
+        public async Task<IActionResult> DeleteFile(string blobName)
+        {
+            await _fileService.DeleteFileAsync(blobName);
+
+            return Ok(new 
+                { 
+                    Message = "File Deleted Successfully!" 
+                }
+            );
+        }
     }
 }
