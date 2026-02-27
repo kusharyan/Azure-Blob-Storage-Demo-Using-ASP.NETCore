@@ -1,4 +1,3 @@
-using System.Reflection.Metadata;
 using BlobStorageDemo.Repository;
 
 namespace BlobStorageDemo.Service
@@ -15,7 +14,7 @@ namespace BlobStorageDemo.Service
         public async Task<string> UploadFileAsync(IFormFile file)
         {
             if(file == null || file.Length == 0)
-                throw  new ArgumentException("File is Empty");
+                throw  new ArgumentException("File is Empty, Please provide a valid file.");
 
             using var stream = file.OpenReadStream();
 
@@ -39,8 +38,7 @@ namespace BlobStorageDemo.Service
         public async Task DeleteFileAsync(string blobName)
         {
             if(string.IsNullOrWhiteSpace(blobName))
-                throw new ArgumentException("Blob Name is Invalid");
-            
+                throw new ArgumentException("Blob Name is Invalid, Please provide a valid blob name.");
             await _blobStorageRepo.DeleteAsync(blobName);
         }
     }

@@ -35,7 +35,6 @@ namespace BlobStorageDemo.Repository
 
             await blobClient.UploadAsync(fileStream, options);
 
-            // await blobClient.Uri.ToString();
             return blobName;
         }
 
@@ -52,7 +51,7 @@ namespace BlobStorageDemo.Repository
             var blobClient = _blobContainerClient.GetBlobClient(blobName);
             var exists = await blobClient.ExistsAsync();
             if(!exists.Value)
-                throw new FileNotFoundException("Blob Not Found");
+                throw new FileNotFoundException("Blob Not Found, Please provide a valid blob name.");
 
             await blobClient.DeleteAsync();
         }
